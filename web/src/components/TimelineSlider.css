@@ -1,0 +1,156 @@
+/* 垂直時間刻度控制器 - 極簡設計 */
+.time-slider-container {
+  position: fixed;
+  right: 2rem; /* 移回右邊 */
+  top: 58%; /* 調整垂直位置 */
+  transform: translateY(-50%); /* 置中偏移 */
+  width: 80px;
+  height: 45vh; /* 縮減 50%：90vh → 45vh */
+  max-height: none;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+/* 垂直滑桿容器 */
+.slider-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+  position: relative;
+  padding: 0 5px; /* 需求 2：左右各 5px padding */
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* 時間刻度標記容器 */
+.time-marks {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 刻度線基礎樣式 */
+.time-mark {
+  position: relative;
+  height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.time-mark::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.7);
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 細線（每個時間點）- 每 30 分鐘 */
+.time-mark.thin::before {
+  width: 12px;
+  height: 0.5px;
+}
+
+/* 粗線（每4個細線後）- 每 2 小時 */
+.time-mark.thick::before {
+  width: 20px;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.7);
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.4));
+}
+
+/* 當前位置指示器 */
+.current-position-indicator {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.3),
+              0 2px 8px rgba(139, 92, 246, 0.5);
+  pointer-events: none;
+  z-index: 20;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 這些樣式已移除，因為不再使用原生 input */
+
+/* 當前時間顯示框 - 跟隨滑鼠 */
+.current-time-bubble {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.95);
+  color: #000;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 10000;
+  white-space: nowrap;
+}
+
+.current-time-bubble.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 移動端適配 */
+@media (max-width: 768px) {
+  .time-slider-container {
+    right: 1rem; /* 右邊 */
+    width: 60px; /* 80px 比例縮小 */
+  }
+
+  .slider-controls {
+    padding: 0 5px;
+  }
+
+  .time-mark.thin::before {
+    width: 10px;
+  }
+
+  .time-mark.thick::before {
+    width: 16px;
+  }
+
+  .current-time-bubble {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+  }
+}
+
+/* 小螢幕適配 */
+@media (max-width: 480px) {
+  .time-slider-container {
+    right: 0.5rem; /* 右邊 */
+    width: 50px; /* 80px 比例縮小 */
+    height: 40vh; /* 小螢幕稍微縮小高度 */
+  }
+
+  .slider-controls {
+    padding: 0 5px; /* 統一為 0 5px */
+  }
+}

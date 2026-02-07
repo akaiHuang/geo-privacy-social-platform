@@ -1,0 +1,2235 @@
+/* 全局樣式 - 深色主題 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #0A0A0F 0%, #1A1A24 100%);
+  color: #E5E7EB;
+  line-height: 1.6;
+}
+
+/* 認證頁面 */
+.auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0A0A0F 0%, #1A1A24 100%);
+  padding: 2rem;
+}
+
+.auth-box {
+  background: rgba(26, 26, 36, 0.95);
+  padding: 2.5rem;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  width: 100%;
+  max-width: 420px;
+  backdrop-filter: blur(10px);
+}
+
+.auth-title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #A78BFA 0%, #10B981 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+}
+
+.auth-subtitle {
+  text-align: center;
+  color: #9CA3AF;
+  margin-bottom: 2rem;
+  font-size: 1.125rem;
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid rgba(167, 139, 250, 0.3);
+  background: rgba(36, 36, 53, 0.6);
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #E5E7EB;
+}
+
+.auth-tab.active {
+  background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(167, 139, 250, 0.3);
+}
+
+.auth-mode-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem;
+  background: rgba(36, 36, 53, 0.6);
+  border-radius: 12px;
+}
+
+.mode-tab {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  color: #9CA3AF;
+}
+
+.mode-tab.active {
+  background: rgba(167, 139, 250, 0.2);
+  color: #A78BFA;
+  font-weight: 600;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-input {
+  padding: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: rgba(36, 36, 53, 0.6);
+  color: #E5E7EB;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: #A78BFA;
+  background: rgba(36, 36, 53, 0.8);
+  box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.1);
+}
+
+.auth-error {
+  padding: 0.75rem;
+  background: rgba(239, 68, 68, 0.1);
+  color: #FCA5A5;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.auth-button {
+  padding: 1rem;
+  background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(167, 139, 250, 0.3);
+}
+
+.auth-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(167, 139, 250, 0.4);
+}
+
+.auth-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.5rem 0;
+  color: #6B7280;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.auth-divider span {
+  padding: 0 1rem;
+  font-size: 0.9rem;
+}
+
+.social-auth {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: rgba(36, 36, 53, 0.6);
+  color: #E5E7EB;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.social-button:hover:not(:disabled) {
+  border-color: #A78BFA;
+  background: rgba(167, 139, 250, 0.1);
+  transform: translateY(-2px);
+}
+
+.social-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.social-button.google {
+  color: #E5E7EB;
+}
+
+.social-button.apple {
+  color: #E5E7EB;
+}
+
+.social-button svg {
+  flex-shrink: 0;
+}
+
+/* 主應用程式容器 */
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0A0A0F 0%, #1A1A24 100%);
+}
+
+.app-header {
+  background: rgba(26, 26, 36, 0.95);
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(167, 139, 250, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.app-header h1 {
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #A78BFA 0%, #10B981 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.header-actions button {
+  padding: 0.5rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: rgba(36, 36, 53, 0.6);
+  color: #E5E7EB;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+}
+
+.header-actions button.active {
+  background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(167, 139, 250, 0.3);
+}
+
+.btn-create {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+  color: white !important;
+  border-color: transparent !important;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-create:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4) !important;
+}
+
+.btn-logout {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #FCA5A5 !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+.btn-logout:hover {
+  background: rgba(239, 68, 68, 0.2) !important;
+  transform: translateY(-2px) !important;
+}
+
+.app-main {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: calc(100vh - 70px);
+}
+
+.feed-container,
+.profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.feed-container h2,
+.profile-container h2 {
+  margin-bottom: 2rem;
+  color: #E5E7EB;
+  font-weight: 700;
+}
+
+.no-posts {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(26, 26, 36, 0.8);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: #9CA3AF;
+}
+
+.no-posts p:first-child {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #E5E7EB;
+}
+
+.posts-grid {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 935px; /* 與個人卡片一致 */
+  margin: 0 auto; /* 居中 */
+  padding: 0 20px; /* 兩側間距 */
+}
+
+.post-card {
+  background: #1a1a1a; /* 純色背景，與個人卡片一致 */
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s;
+  animation: fadeIn 0.5s ease-out;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 輕微陰影 */
+}
+
+.post-card:hover {
+  border-color: rgba(167, 139, 250, 0.3);
+  box-shadow: 0 8px 24px rgba(167, 139, 250, 0.15);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.post-user {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(167, 139, 250, 0.3);
+}
+
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.user-name {
+  font-weight: 600;
+  color: #E5E7EB;
+}
+
+.user-username {
+  font-size: 0.9rem;
+  color: #9CA3AF;
+}
+
+.post-time {
+  font-size: 0.9rem;
+  color: #6B7280;
+}
+
+.post-content {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: #E5E7EB;
+}
+
+.post-media {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.post-media img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  max-height: 300px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.post-location {
+  font-size: 0.9rem;
+  color: #10B981;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.post-actions {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.post-actions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: rgba(36, 36, 53, 0.6);
+  color: #E5E7EB;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.post-actions button:hover {
+  background: rgba(167, 139, 250, 0.2);
+  border-color: #A78BFA;
+  transform: translateY(-2px);
+}
+
+/* 收藏按鈕 */
+.favorite-btn {
+  font-size: 1.2rem !important;
+  transition: all 0.3s ease;
+}
+
+.favorite-btn.favorited {
+  background: rgba(255, 215, 0, 0.2) !important;
+  border-color: #FFD700 !important;
+  color: #FFD700 !important;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.1) translateY(-2px) !important;
+}
+
+/* 評論區 */
+.comments-section {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.comments-loading {
+  text-align: center;
+  padding: 1rem;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.comments-list {
+  margin-bottom: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.comment-item {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, rgba(26, 26, 36, 0.6) 0%, rgba(20, 20, 30, 0.6) 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  transition: all 0.3s ease;
+}
+
+.comment-item:hover {
+  background: linear-gradient(135deg, rgba(26, 26, 36, 0.8) 0%, rgba(20, 20, 30, 0.8) 100%);
+  border-color: rgba(167, 139, 250, 0.3);
+}
+
+.comment-header {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.comment-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.comment-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder-small {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #A78BFA, #8B5CF6);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.comment-info {
+  flex: 1;
+}
+
+.comment-user {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #E5E7EB;
+}
+
+.comment-time {
+  font-size: 0.75rem;
+  color: #9CA3AF;
+  margin-top: 2px;
+}
+
+.comment-content {
+  font-size: 0.9rem;
+  color: #D1D5DB;
+  line-height: 1.5;
+  padding-left: 40px;
+}
+
+.reply-btn {
+  margin-left: 40px;
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  background: none;
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  color: #A78BFA;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.reply-btn:hover {
+  background: rgba(167, 139, 250, 0.1);
+  border-color: rgba(167, 139, 250, 0.5);
+}
+
+/* 回覆的留言樣式 */
+
+.reply-item {
+  margin-left: 3rem;
+  margin-top: 0.75rem;
+  background: #ffffff;
+  border-left: 3px solid #667eea;
+}
+
+.reply-input-container {
+  margin-left: 3rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: #f0f4ff;
+  border-radius: 8px;
+}
+
+.comment-input {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.comment-input input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.comment-input input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.send-btn {
+  padding: 0.75rem 1.5rem;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.send-btn:hover {
+  background: #5568d3;
+}
+
+.cancel-btn {
+  padding: 0.75rem 1.5rem;
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.cancel-btn:hover {
+  background: #5a6268;
+}
+
+.profile-container {
+  background: transparent; /* 移除背景，讓卡片獨立 */
+  padding: 0;
+  overflow: hidden;
+}
+
+/* 個人資料頭部 - 卡片式設計 */
+.profile-header {
+  max-width: 935px;
+  margin: 80px auto 40px; /* 統一間距，與 ProfilePage.css 一致 */
+  padding: 32px;
+  background: #1a1a1a; /* 純色背景，更簡潔 */
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.05); /* 微妙的邊框 */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* 輕微陰影 */
+  position: relative; /* 確保正確的堆疊上下文 */
+  z-index: 1; /* 低於 app-header 的 z-index: 100 */
+}
+
+.profile-info {
+  flex: 1;
+  text-align: left;
+  min-width: 0; /* 防止文字溢出 */
+}
+
+.profile-avatar-large {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #A78BFA, #8B5CF6);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 600;
+  border: none; /* 移除邊框，更簡潔 */
+  box-shadow: 0 4px 12px rgba(167, 139, 250, 0.3);
+  flex-shrink: 0;
+  overflow: hidden;
+  text-transform: uppercase; /* 頭像文字大寫 */
+  user-select: none;
+}
+
+.profile-avatar-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-name-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.edit-profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(167, 139, 250, 0.2);
+  color: #A78BFA;
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edit-profile-btn:hover {
+  background-color: rgba(167, 139, 250, 0.3);
+  border-color: rgba(167, 139, 250, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(167, 139, 250, 0.2);
+}
+
+.edit-profile-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* 步驟2：追蹤按鈕樣式 */
+.follow-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(59, 130, 246, 0.2);
+  color: #3B82F6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.follow-btn:hover {
+  background-color: rgba(59, 130, 246, 0.3);
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.profile-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+  color: #E5E7EB;
+}
+
+.profile-username {
+  color: #9CA3AF;
+  margin-bottom: 1rem;
+}
+
+.profile-bio {
+  color: #D1D5DB;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.profile-bio :global(.bio-link) {
+  color: #A78BFA;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.profile-bio :global(.bio-link):hover {
+  color: #8B5CF6;
+  text-decoration: underline;
+}
+
+.profile-badge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #A78BFA;
+}
+
+.profile-website {
+  display: inline-block;
+  color: #A78BFA;
+  text-decoration: none;
+  font-size: 0.9375rem;
+  transition: all 0.2s;
+  margin-top: 0.5rem;
+}
+
+.profile-website:hover {
+  color: #8B5CF6;
+  text-decoration: underline;
+}
+
+/* 個人資料統計 */
+.profile-stats {
+  max-width: 935px;
+  margin: 32px auto; /* 統一上下間距 */
+  display: flex;
+  gap: 2rem;
+  padding: 0 20px; /* 添加左右內邊距，與其他區域一致 */
+  border: none; /* 移除邊框，卡片內不需要分隔 */
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 1rem 1.5rem; /* 添加內邊距讓統計區域更明顯 */
+  background: rgba(167, 139, 250, 0.05); /* 微妙的背景色 */
+  border-radius: 12px;
+  flex: 1; /* 讓每個統計項平均分配寬度 */
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 700; /* 加粗數字 */
+  color: #E5E7EB;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #9CA3AF;
+}
+
+/* 個人貼文區域 */
+.profile-posts-section {
+  padding: 0;
+  max-width: 935px; /* 與個人卡片一致 */
+  margin: 0 auto; /* 居中 */
+}
+
+.profile-posts-header {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* 與 ProfilePage 一致 */
+  margin: 0 20px 32px; /* 添加下方間距 32px，與 ProfilePage 一致 */
+}
+
+.posts-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  color: #9CA3AF;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 2px solid transparent;
+  position: relative; /* 為底線定位做準備 */
+}
+
+.posts-tab.active {
+  color: #A78BFA; /* 與 ProfilePage 一致 */
+  border-bottom-color: #A78BFA;
+}
+
+.posts-tab svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* 刪除單筆歷史記錄按鈕 - iOS 風格 */
+.delete-history-btn {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(255, 59, 48, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  opacity: 0;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-post-item:hover .delete-history-btn {
+  opacity: 1;
+}
+
+.delete-history-btn:hover {
+  background: rgba(255, 59, 48, 1);
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(255, 59, 48, 0.4);
+}
+
+.delete-history-btn:active {
+  transform: scale(0.95);
+}
+
+/* 清空所有歷史記錄浮動按鈕 - iOS 風格 */
+.clear-all-history-fab {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 59, 48, 0.95);
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(255, 59, 48, 0.4);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+.clear-all-history-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 24px rgba(255, 59, 48, 0.6);
+  background: rgba(255, 59, 48, 1);
+}
+
+.clear-all-history-fab:active {
+  transform: scale(0.95);
+}
+
+/* 個人貼文網格 - IG 風格 */
+.profile-posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 0 20px; /* 兩側間距 */
+}
+
+.feed-posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.feed-post-item {
+  position: relative;
+  aspect-ratio: 10 / 16;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1A1A24 0%, #242435 100%);
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 12px;
+}
+
+.feed-post-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.feed-post-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: linear-gradient(135deg, #1A1A24 0%, #242435 100%);
+}
+
+.feed-post-content p {
+  color: #D1D5DB;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  -webkit-box-orient: vertical;
+  text-align: center;
+}
+
+.feed-post-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 10, 15, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.feed-post-item:hover .feed-post-overlay {
+  opacity: 1;
+}
+
+.feed-post-item:hover img {
+  transform: scale(1.05);
+}
+
+.feed-post-overlay .overlay-stats {
+  display: flex;
+  gap: 1rem;
+  color: #E5E7EB;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.feed-post-overlay .overlay-user {
+  color: #A78BFA;
+  font-size: 0.875rem;
+}
+
+.profile-post-item {
+  position: relative;
+  aspect-ratio: 10 / 16;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1A1A24 0%, #242435 100%);
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 12px;
+}
+
+.profile-post-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.profile-post-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: linear-gradient(135deg, #1A1A24 0%, #242435 100%);
+}
+
+.profile-post-content p {
+  color: #D1D5DB;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  -webkit-box-orient: vertical;
+  text-align: center;
+}
+
+.profile-post-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 10, 15, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.profile-post-item:hover .profile-post-overlay {
+  opacity: 1;
+}
+
+.profile-post-item:hover img {
+  transform: scale(1.05);
+}
+
+.overlay-stats {
+  display: flex;
+  gap: 1.5rem;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.overlay-stats span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 地圖視圖 - 深色主題 */
+.map-container {
+  display: flex;
+  flex-direction: row-reverse; /* 反轉順序：地圖在右，側邊欄在左 */
+  height: calc(100vh - 70px); /* 使用 viewport height 減去 header 高度 */
+  min-height: 600px; /* 確保最小高度 */
+  background: linear-gradient(135deg, #0A0A0F 0%, #1A1A24 100%);
+}
+
+.leaflet-map-view {
+  flex: 1;
+  height: 100%;
+  min-height: 600px; /* 確保最小高度 */
+  z-index: 1;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Leaflet 深色主題覆蓋 */
+.leaflet-container {
+  background: #1A1A24 !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: rgba(26, 26, 36, 0.95) !important;
+  color: #E5E7EB !important;
+  border: 1px solid rgba(167, 139, 250, 0.3) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(10px);
+}
+
+.leaflet-popup-tip {
+  background: rgba(26, 26, 36, 0.95) !important;
+}
+
+.map-popup {
+  color: #E5E7EB;
+}
+
+.map-popup strong {
+  color: #A78BFA;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.map-popup p {
+  color: #9CA3AF;
+  margin: 0;
+}
+
+/* 自訂標記樣式 - 深色主題 */
+.custom-marker {
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 4px 12px rgba(167, 139, 250, 0.3));
+}
+
+.custom-marker:hover {
+  transform: scale(1.1);
+  z-index: 1000 !important;
+  filter: drop-shadow(0 8px 20px rgba(167, 139, 250, 0.5));
+}
+
+.marker-image-container {
+  width: 60px;
+  height: 80px;
+  background: linear-gradient(135deg, #1A1A24 0%, #242435 100%);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border: 3px solid rgba(167, 139, 250, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 只針對 marker 內的圖片設定寬度 100% */
+.marker-image-container img,
+.marker-photo {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover;
+  object-position: center;
+}
+
+.marker-placeholder {
+  width: 60px;
+  height: 80px;
+  background: linear-gradient(135deg, #A78BFA, #8B5CF6);
+  border-radius: 12px;
+  border: 3px solid rgba(167, 139, 250, 0.5);
+  box-shadow: 0 4px 12px rgba(167, 139, 250, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.map-posts {
+  width: 400px;
+  background: rgba(26, 26, 36, 0.95);
+  backdrop-filter: blur(10px);
+  overflow-y: auto;
+  padding: 1.5rem;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5); /* 改為右側陰影（因為在左邊） */
+  border-right: 1px solid rgba(167, 139, 250, 0.2); /* 改為右側邊框 */
+}
+
+.map-posts h3 {
+  margin-bottom: 1.5rem;
+  color: #E5E7EB;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.mini-post-card {
+  background: rgba(36, 36, 53, 0.8);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.mini-post-card:hover {
+  box-shadow: 0 8px 20px rgba(167, 139, 250, 0.2);
+  transform: translateY(-2px);
+  border-color: #A78BFA;
+  background: rgba(36, 36, 53, 0.95);
+}
+
+.mini-post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.mini-user-info {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.mini-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #A78BFA, #8B5CF6);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: 2px solid rgba(167, 139, 250, 0.3);
+  overflow: hidden;
+}
+
+.mini-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mini-user-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #E5E7EB;
+}
+
+.mini-location {
+  font-size: 0.75rem;
+  color: #10B981;
+  margin-top: 2px;
+}
+
+.mini-post-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  max-height: 200px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mini-post-content {
+  font-size: 0.9rem;
+  color: #E5E7EB;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mini-post-stats {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.85rem;
+  color: #9CA3AF;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mini-like-btn,
+.mini-comment-btn,
+.mini-favorite-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0.25rem 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+  color: #FFFFFF;
+}
+
+.mini-like-btn:hover,
+.mini-comment-btn:hover,
+.mini-favorite-btn:hover {
+  transform: scale(1.1);
+}
+
+.mini-like-btn.liked {
+  animation: heartBeat 0.3s ease;
+}
+
+.mini-favorite-btn {
+  margin-left: auto;
+  font-size: 1.2rem;
+}
+
+.mini-favorite-btn.favorited {
+  color: #FFD700;
+}
+
+/* 星星圖標容器 */
+.mini-favorite-btn .star-icon,
+.fullscreen-post-actions .action-btn .star-icon {
+  display: inline-block;
+}
+
+/* 星星旋轉動畫 - 只針對已收藏的星星 */
+.mini-favorite-btn.favorited .star-icon {
+  animation: starSpin 0.5s ease;
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+@keyframes starSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* ===== 地圖 B (A/B Test) ===== */
+.map-b-container {
+  position: relative;
+  height: calc(100vh - 70px);
+  min-height: 600px;
+  width: 100vw; /* 滿版寬度 */
+  margin-left: calc(-50vw + 50%); /* 突破容器限制 */
+  background: linear-gradient(135deg, #0A0A0F 0%, #1A1A24 100%);
+}
+
+.leaflet-map-b-view {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Leaflet Popup */
+.map-popup {
+  min-width: 150px;
+}
+
+.map-popup strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.map-popup p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #0a0a0f1c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+.modal-content {
+  background: linear-gradient(135deg, rgba(26, 26, 36, 0.98) 0%, rgba(20, 20, 30, 0.98) 100%);
+  border-radius: 24px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  backdrop-filter: blur(20px);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #E5E7EB;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #9CA3AF;
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.close-button:hover {
+  background: rgba(167, 139, 250, 0.2);
+  color: #E5E7EB;
+}
+
+.modal-body {
+  padding: 2rem 1.5rem;
+}
+
+.modal-message {
+  font-size: 1.1rem;
+  color: #E5E7EB;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.modal-info {
+  font-size: 0.95rem;
+  color: #9CA3AF;
+  margin-bottom: 0.75rem;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.modal-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+}
+
+.modal-footer .btn-primary {
+  padding: 0.75rem 2rem;
+}
+
+/* 發文 Modal */
+.create-post-modal {
+  max-width: 600px;
+}
+
+.post-textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  background: rgba(26, 26, 36, 0.6);
+  color: #E5E7EB;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.post-textarea:focus {
+  outline: none;
+  border-color: rgba(167, 139, 250, 0.6);
+  background: rgba(26, 26, 36, 0.8);
+}
+
+.post-textarea::placeholder {
+  color: #6B7280;
+}.post-textarea:focus {
+  outline: none;
+  border-color: #007aff;
+}
+
+.post-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.upload-button,
+.location-button {
+  padding: 0.75rem 1.25rem;
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 12px;
+  background: rgba(167, 139, 250, 0.1);
+  color: #A78BFA;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.upload-button:hover,
+.location-button:hover {
+  background: rgba(167, 139, 250, 0.2);
+  border-color: rgba(167, 139, 250, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(167, 139, 250, 0.3);
+}
+
+.location-button {
+  background: #e8f5e9;
+  border-color: #4caf50;
+}
+
+.image-preview {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.image-preview img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.remove-image {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.location-info {
+  padding: 0.875rem 1rem;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.15) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: #10B981;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+/* 通知相關樣式 */
+.notification-badge {
+  display: inline-block;
+  background: #f44336;
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 10px;
+  margin-left: 0.3rem;
+  font-weight: bold;
+}
+
+.notifications-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.notifications-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.notifications-header h2 {
+  margin: 0;
+}
+
+.friend-requests-section {
+  background: #fff3e0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.friend-requests-section h3 {
+  margin-top: 0;
+  color: #f57c00;
+}
+
+.notifications-list h3 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.notification-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  border: 1px solid #e0e0e0;
+  transition: all 0.2s;
+  cursor: pointer;
+  position: relative;
+}
+
+.notification-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.notification-item.unread {
+  background: #e3f2fd;
+  border-color: #2196f3;
+}
+
+.notification-item.read {
+  opacity: 0.7;
+}
+
+.notification-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #667eea;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.notification-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.notification-content {
+  flex: 1;
+}
+
+.notification-content p {
+  margin: 0 0 0.25rem 0;
+  color: #333;
+}
+
+.notification-time {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+.notification-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.unread-indicator {
+  width: 10px;
+  height: 10px;
+  background: #2196f3;
+  border-radius: 50%;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.no-notifications {
+  text-align: center;
+  padding: 3rem;
+  color: #999;
+}
+
+/* 好友相關樣式 */
+.post-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.friend-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.btn-small {
+  padding: 0.3rem 0.8rem;
+  border: 1px solid #e0e0e0;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-small:hover {
+  background: #f5f5f5;
+}
+
+.btn-small.btn-primary {
+  background: #2196f3;
+  color: white;
+  border-color: #2196f3;
+}
+
+.btn-small.btn-primary:hover {
+  background: #1976d2;
+}
+
+.btn-small.btn-secondary {
+  background: #757575;
+  color: white;
+  border-color: #757575;
+}
+
+.btn-small.btn-secondary:hover {
+  background: #616161;
+}
+
+.btn-small.btn-danger {
+  background: #f44336;
+  color: white;
+  border-color: #f44336;
+}
+
+.btn-small.btn-danger:hover {
+  background: #d32f2f;
+}
+
+.status-text {
+  font-size: 0.85rem;
+  color: #666;
+  padding: 0.3rem 0.8rem;
+  background: #f5f5f5;
+  border-radius: 6px;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  /* 個人資料卡片響應式 */
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 20px;
+    padding: 24px;
+    gap: 24px;
+  }
+
+  .profile-name-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .profile-stats {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  /* 動態卡片響應式 */
+  .posts-grid {
+    padding: 0 16px;
+  }
+
+  .map-container {
+    flex-direction: column;
+    min-height: unset !important; /* 移除桌面版的 min-height 限制 */
+    height: 100vh !important; /* 使用完整視窗高度 */
+  }
+
+  /* 地圖A的 MapboxView 容器 */
+  .map-container > div:first-child {
+    height: 25vh !important;
+    min-height: unset !important;
+    flex: none !important;
+  }
+
+  /* 地圖B */
+  .map-view {
+    height: 25vh;
+  }
+
+  .map-posts {
+    width: 100%;
+    height: 75vh;
+    flex: none !important;
+  }
+
+  /* 手機版地圖A的 post card 寬度 90%，靠左對齊 */
+  .map-posts .mini-post-card {
+    width: 90%;
+  }
+
+  .header-actions {
+    gap: 0.5rem;
+  }
+
+  .header-actions button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .post-header-right {
+    align-items: flex-start;
+  }
+
+  .friend-actions {
+    flex-wrap: wrap;
+  }
+
+  .notification-item {
+    flex-wrap: wrap;
+  }
+
+  .notification-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+/* Mapbox 標記樣式 */
+.mapbox-marker {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 4px 12px rgba(167, 139, 250, 0.3));
+}
+
+.mapbox-marker:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 8px 20px rgba(167, 139, 250, 0.5));
+}
+
+.mapbox-marker .marker-image-container {
+  width: 60px;
+  height: 80px;
+  background: linear-gradient(135deg, #1A1A24 0%, #242435 100%);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border: 3px solid rgba(167, 139, 250, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapbox-marker .marker-photo {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  object-position: center;
+}
+
+.mapbox-marker .marker-placeholder {
+  width: 60px;
+  height: 80px;
+  background: linear-gradient(135deg, #A78BFA, #8B5CF6);
+  border-radius: 12px;
+  border: 3px solid rgba(167, 139, 250, 0.5);
+  box-shadow: 0 4px 12px rgba(167, 139, 250, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+/* Mapbox Popup 樣式 */
+.mapbox-popup {
+  background: linear-gradient(135deg, #1A1A24 0%, #242435 100%);
+  border-radius: 12px;
+  padding: 1rem;
+  min-width: 200px;
+  color: #E5E7EB;
+}
+
+.mapbox-popup strong {
+  color: #A78BFA;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.mapbox-popup p {
+  margin: 0;
+  color: #D1D5DB;
+  font-size: 0.95rem;
+}
+
+/* Mapbox 地圖容器樣式 */
+.mapboxgl-popup-content {
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+}
+
+.mapboxgl-popup-close-button {
+  color: #E5E7EB !important;
+  font-size: 1.5rem !important;
+  padding: 0.5rem !important;
+  right: 0.5rem !important;
+  top: 0.5rem !important;
+}
+
+.mapboxgl-popup-close-button:hover {
+  background: rgba(167, 139, 250, 0.2) !important;
+  border-radius: 50%;
+}
+
+.mapboxgl-popup-tip {
+  border-top-color: #1A1A24 !important;
+}
+
+/* 隱藏所有 Mapbox Popup（改用滾動到貼文的方式） */
+.mapboxgl-popup {
+  display: none !important;
+}
+
+/* Mapbox 控制按鈕 */
+.mapboxgl-ctrl-group {
+  background: rgba(26, 26, 36, 0.95) !important;
+  border: 1px solid rgba(167, 139, 250, 0.3) !important;
+  backdrop-filter: blur(10px);
+}
+
+.mapboxgl-ctrl-group button {
+  background: transparent !important;
+  color: #E5E7EB !important;
+}
+
+.mapboxgl-ctrl-group button:hover {
+  background: rgba(167, 139, 250, 0.2) !important;
+}
+
+.mapboxgl-ctrl-group button + button {
+  border-top: 1px solid rgba(167, 139, 250, 0.3) !important;
+}
+
+/* Public Profile Page - Login Prompt Styles */
+.login-fullscreen-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease;
+}
+
+.login-fullscreen-content {
+  background: linear-gradient(135deg, #1F2937 0%, #111827 100%);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 24px;
+  padding: 3rem 2rem;
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.4s ease;
+}
+
+.close-button-fullscreen {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #E5E7EB;
+  font-size: 28px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.close-button-fullscreen:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+.login-prompt-icon {
+  margin-bottom: 1.5rem;
+  color: #A78BFA;
+}
+
+.login-prompt-icon svg {
+  filter: drop-shadow(0 0 20px rgba(167, 139, 250, 0.5));
+}
+
+.login-fullscreen-content h2 {
+  color: #FFFFFF;
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.login-prompt-text {
+  color: #9CA3AF;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.login-prompt-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+
+.feature-item:hover {
+  background: rgba(167, 139, 250, 0.15);
+  transform: translateY(-2px);
+}
+
+.feature-icon {
+  font-size: 1.5rem;
+}
+
+.feature-item span:last-child {
+  color: #E5E7EB;
+  font-size: 0.875rem;
+}
+
+.continue-browsing-btn {
+  background: transparent;
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  color: #A78BFA;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 300px;
+  transition: all 0.2s;
+}
+
+.continue-browsing-btn:hover {
+  background: rgba(167, 139, 250, 0.1);
+  border-color: rgba(167, 139, 250, 0.5);
+}
+
+.dismiss-count-text {
+  margin-top: 1rem;
+  color: #6B7280;
+  font-size: 0.875rem;
+}
+
+.back-button {
+  background: rgba(167, 139, 250, 0.2);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  color: #E5E7EB;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.back-button:hover {
+  background: rgba(167, 139, 250, 0.3);
+  transform: translateX(-2px);
+}
+
+.profile-post-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.profile-post-item:hover .profile-post-overlay {
+  opacity: 1;
+}
+
+.overlay-stats {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 1.1rem;
+  color: white;
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

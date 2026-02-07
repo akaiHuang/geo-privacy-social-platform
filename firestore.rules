@@ -1,0 +1,147 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 用戶集合
+    match /users/{userId} {
+      allow read: if true;
+      // 安全性加強：只能修改自己的資料，且某些欄位不能被修改
+      allow create: if request.auth != null && 
+        request.auth.uid == userId;
+      allow update: if request.auth != null && 
+        request.auth.uid == userId &&
+        // 確保不能修改 createdAt 和 id 欄位
+        (!request.resource.data.keys().hasAny(['createdAt']) || 
+         request.resource.data.createdAt == resource.data.createdAt);
+      allow delete: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // 貼文集合
+    match /posts/{postId} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      // 安全性加強：只能更新自己的貼文，且不能更改 userId
+      allow update: if request.auth != null && 
+        request.auth.uid == resource.data.userId &&
+        request.resource.data.userId == resource.data.userId;
+      allow delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+    
+    // 評論集合
+    match /comments/{commentId} {
+      allow read: if true;
+      // 安全性加強：創建評論時必須確保 userId 是自己
+      allow create: if request.auth != null && 
+        request.resource.data.userId == request.auth.uid;
+      // 只能更新自己的評論，且不能更改 userId
+      allow update: if request.auth != null && 
+        request.auth.uid == resource.data.userId &&
+        request.resource.data.userId == resource.data.userId;
+      allow delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+    
+    // 讚集合
+    match /likes/{likeId} {
+      allow read: if true;
+      // 安全性加強：只能創建/刪除自己的讚，且必須驗證 userId
+      allow create: if request.auth != null && 
+        request.resource.data.userId == request.auth.uid;
+      allow delete: if request.auth != null && 
+        resource.data.userId == request.auth.uid;
+      // 不允許更新讚記錄
+    }
+    
+    // 好友請求集合
+    match /friend_requests/{requestId} {
+      // 允許讀取與自己相關的好友請求
+      allow read: if request.auth != null && 
+        (resource.data.fromUserId == request.auth.uid || 
+         resource.data.toUserId == request.auth.uid);
+      // 允許創建好友請求
+      allow create: if request.auth != null && 
+        request.resource.data.fromUserId == request.auth.uid;
+      // 允許更新自己收到的好友請求（接受/拒絕）
+      allow update: if request.auth != null && 
+        resource.data.toUserId == request.auth.uid;
+      // 允許刪除自己發送或收到的好友請求
+      allow delete: if request.auth != null && 
+        (resource.data.fromUserId == request.auth.uid || 
+         resource.data.toUserId == request.auth.uid);
+    }
+    
+    // 好友關係集合
+    match /friendships/{friendshipId} {
+      // 允許讀取與自己相關的好友關係
+      allow read: if request.auth != null && 
+        (resource.data.userId1 == request.auth.uid || 
+         resource.data.userId2 == request.auth.uid);
+      // 安全性加強：創建好友關係時，必須是兩個用戶之一
+      allow create: if request.auth != null && 
+        (request.resource.data.userId1 == request.auth.uid || 
+         request.resource.data.userId2 == request.auth.uid);
+      // 允許刪除與自己相關的好友關係
+      allow delete: if request.auth != null && 
+        (resource.data.userId1 == request.auth.uid || 
+         resource.data.userId2 == request.auth.uid);
+    }
+    
+    // 封鎖集合
+    match /blocks/{blockId} {
+      // 允許讀取自己的封鎖記錄
+      allow read: if request.auth != null && 
+        resource.data.blockerId == request.auth.uid;
+      // 允許創建封鎖記錄
+      allow create: if request.auth != null && 
+        request.resource.data.blockerId == request.auth.uid;
+      // 允許刪除自己的封鎖記錄
+      allow delete: if request.auth != null && 
+        resource.data.blockerId == request.auth.uid;
+    }
+    
+    // 通知集合
+    match /notifications/{notificationId} {
+      // 只允許讀取發送給自己的通知
+      allow read: if request.auth != null && 
+        resource.data.userId == request.auth.uid;
+      // 安全性加強：創建通知時，必須是發送者本人或系統（fromUserId 是自己）
+      // 或者 userId 是自己（給自己創建通知）
+      allow create: if request.auth != null && 
+        (request.resource.data.fromUserId == request.auth.uid || 
+         request.resource.data.userId == request.auth.uid);
+      // 允許更新自己的通知（標記為已讀）
+      allow update: if request.auth != null && 
+        resource.data.userId == request.auth.uid;
+      // 允許刪除自己的通知
+      allow delete: if request.auth != null && 
+        resource.data.userId == request.auth.uid;
+    }
+    
+    // 收藏集合
+    match /favorites/{favoriteId} {
+      // 允許讀取自己的收藏
+      allow read: if request.auth != null && 
+        resource.data.userId == request.auth.uid;
+      // 允許創建收藏
+      allow create: if request.auth != null && 
+        request.resource.data.userId == request.auth.uid;
+      // 允許刪除自己的收藏
+      allow delete: if request.auth != null && 
+        resource.data.userId == request.auth.uid;
+    }
+    
+    // 瀏覽歷史集合
+    match /view_history/{historyId} {
+      // 允許讀取自己的瀏覽歷史
+      allow read: if request.auth != null && 
+        resource.data.userId == request.auth.uid;
+      // 允許創建瀏覽歷史
+      allow create: if request.auth != null && 
+        request.resource.data.userId == request.auth.uid;
+      // 允許更新自己的瀏覽歷史
+      allow update: if request.auth != null && 
+        resource.data.userId == request.auth.uid;
+      // 允許刪除自己的瀏覽歷史
+      allow delete: if request.auth != null && 
+        resource.data.userId == request.auth.uid;
+    }
+  }
+}

@@ -1,0 +1,783 @@
+.profile-page {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #ffffff;
+}
+
+.profile-page-loading,
+.profile-page-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-size: 18px;
+  color: #999;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(167, 139, 250, 0.2);
+  border-top-color: #A78BFA;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Header */
+.profile-header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: rgba(26, 26, 26, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 100;
+}
+
+.profile-header h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  flex: 1;
+  text-align: center;
+}
+
+.spacer {
+  width: 72px; /* 與按鈕寬度相同，用於佔位 */
+}
+
+.back-btn,
+.home-btn {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+  min-width: 72px;
+}
+
+.back-btn:hover,
+.home-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Profile Info Card */
+.profile-info-card {
+  max-width: 935px; /* 與 Instagram 等社交平台一致 */
+  margin: 80px auto 40px; /* 增加上方間距，與 App.css 一致 */
+  padding: 32px;
+  background: #1a1a1a;
+  border-radius: 16px;
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+  width: 120px; /* 明確設定寬度 */
+  height: 120px; /* 明確設定高度 */
+}
+
+.profile-avatar img,
+.avatar-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%);
+  font-size: 48px;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase; /* 強制大寫 */
+  user-select: none; /* 防止選取 */
+  flex-shrink: 0; /* 防止被壓縮 */
+}
+
+.profile-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-name-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.profile-name-row h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.profile-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(167, 139, 250, 0.2);
+  color: #A78BFA;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.profile-bio {
+  margin: 12px 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #ccc;
+  word-wrap: break-word;
+}
+
+.profile-bio a {
+  color: #A78BFA;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.profile-bio a:hover {
+  color: #C4B5FD;
+  text-decoration: underline;
+}
+
+.profile-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.meta-item {
+  font-size: 14px;
+  color: #999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.meta-item a {
+  color: #A78BFA;
+  text-decoration: none;
+}
+
+.meta-item a:hover {
+  text-decoration: underline;
+}
+
+.profile-actions {
+  margin-top: 20px;
+}
+
+.add-friend-btn,
+.pending-btn,
+.friends-btn,
+.login-prompt-btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-friend-btn,
+.login-prompt-btn {
+  background: #A78BFA;
+  color: white;
+}
+
+.add-friend-btn:hover,
+.login-prompt-btn:hover {
+  background: #8B5CF6;
+  transform: translateY(-2px);
+}
+
+.pending-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #999;
+  cursor: not-allowed;
+}
+
+.friends-btn {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+  cursor: default;
+}
+
+/* Tabs */
+.profile-tabs {
+  max-width: 935px; /* 與個人資訊卡和內容區一致 */
+  margin: 0 auto 32px;
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0 20px; /* 添加左右間距 */
+}
+
+.profile-tabs button {
+  flex: 1;
+  padding: 12px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #999;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.profile-tabs button.active {
+  color: #A78BFA;
+  border-bottom-color: #A78BFA;
+}
+
+.profile-tabs button:hover {
+  color: #fff;
+}
+
+/* Content */
+.profile-content {
+  max-width: 935px; /* 與個人資訊卡一致 */
+  margin: 0 auto;
+  padding: 0 20px 40px;
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 固定 3 列 */
+  gap: 1.5rem; /* 登入個人頁面使用較大間距 */
+}
+
+@media (max-width: 768px) {
+  .posts-grid {
+    grid-template-columns: repeat(3, 1fr); /* 手機版也保持 3 列 */
+  }
+}
+
+.post-thumbnail {
+  position: relative;
+  aspect-ratio: 10 / 16; /* 直式手機比例，與登入後一致 */
+  background: linear-gradient(135deg, #1A1A24 0%, #242435 100%);
+  border-radius: 12px; /* 恢復圓角 */
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.post-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.post-thumbnail:hover img {
+  transform: scale(1.05); /* 與登入後一致 */
+}
+
+.post-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: linear-gradient(135deg, #1A1A24 0%, #242435 100%);
+}
+
+.post-content p {
+  color: #D1D5DB;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  -webkit-box-orient: vertical;
+  text-align: center;
+}
+
+.post-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 10, 15, 0.7); /* 與 App.tsx 一致 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+}
+
+.post-thumbnail:hover .post-overlay {
+  opacity: 1;
+}
+
+.favorite-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 24px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  pointer-events: none;
+  animation: starGlow 2s ease-in-out infinite;
+}
+
+@keyframes starGlow {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.6));
+  }
+  50% {
+    transform: scale(1.1);
+    filter: drop-shadow(0 2px 12px rgba(255, 215, 0, 0.9));
+  }
+}
+
+.empty-state {
+  padding: 60px 20px;
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+}
+
+/* Login Prompt Modal */
+.login-prompt-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s;
+}
+
+.login-prompt-content {
+  background: #1a1a1a;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 400px;
+  width: 90%;
+  animation: slideUp 0.3s;
+}
+
+.login-prompt-content h3 {
+  margin: 0 0 12px;
+  font-size: 22px;
+}
+
+.login-prompt-content p {
+  margin: 0 0 24px;
+  color: #999;
+  line-height: 1.6;
+}
+
+.prompt-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.prompt-actions button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.prompt-actions button:first-child {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.prompt-actions button:first-child:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.prompt-actions button.primary {
+  background: #A78BFA;
+  color: white;
+}
+
+.prompt-actions button.primary:hover {
+  background: #8B5CF6;
+}
+
+/* Map View Placeholder */
+.map-view-placeholder {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.coming-soon {
+  background: #1a1a1a;
+  border-radius: 16px;
+  padding: 60px 40px;
+  border: 2px dashed rgba(167, 139, 250, 0.3);
+}
+
+.coming-soon p {
+  margin: 16px 0 24px;
+  color: #999;
+  font-size: 16px;
+}
+
+.login-cta {
+  padding: 12px 32px;
+  background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.login-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(167, 139, 250, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-info-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 20px;
+    padding: 24px;
+  }
+
+  .profile-name-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .profile-meta {
+    align-items: center;
+  }
+
+  .posts-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 8px;
+  }
+  
+  .spacer {
+    width: 50px;
+  }
+  
+  .back-btn,
+  .home-btn {
+    min-width: 50px;
+    padding: 8px 12px;
+  }
+}
+
+/* 步驟3：全螢幕註冊邀請彈窗樣式 */
+.fullscreen-auth-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fullscreen-auth-modal .close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  backdrop-filter: blur(10px);
+}
+
+.fullscreen-auth-modal .close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+.auth-content {
+  max-width: 500px;
+  width: 100%;
+  background: white;
+  border-radius: 24px;
+  padding: 48px 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.4s ease-out;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auth-hero {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.auth-hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 12px 0;
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+}
+
+.auth-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 32px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+  border-radius: 16px;
+}
+
+.benefit-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.benefit-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+}
+
+.benefit-item h4 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.benefit-item p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.auth-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.auth-btn.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+}
+
+.auth-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.auth-btn.secondary {
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+}
+
+.auth-btn.secondary:hover {
+  background: #f8f9ff;
+}
+
+.btn-icon {
+  font-size: 20px;
+}
+
+.auth-footer {
+  text-align: center;
+}
+
+.auth-footer p {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  color: #999;
+}
+
+.social-auth-btns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.social-btn {
+  flex: 1;
+  padding: 12px 16px;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.social-btn:hover {
+  background: #ebebeb;
+  transform: translateY(-1px);
+}
+
+.social-btn.google:hover {
+  background: #fff;
+  border-color: #4285f4;
+  color: #4285f4;
+}
+
+.social-btn.apple:hover {
+  background: #000;
+  border-color: #000;
+  color: #fff;
+}
+
+.social-btn.email:hover {
+  background: #fff;
+  border-color: #667eea;
+  color: #667eea;
+}
+
+/* 響應式調整 */
+@media (max-width: 640px) {
+  .auth-content {
+    padding: 32px 24px;
+  }
+
+  .auth-hero h1 {
+    font-size: 28px;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+  }
+
+  .auth-benefits {
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .benefit-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  .benefit-item h4 {
+    font-size: 14px;
+  }
+
+  .benefit-item p {
+    font-size: 13px;
+  }
+
+  .social-auth-btns {
+    flex-direction: column;
+  }
+
+  .social-btn {
+    width: 100%;
+  }
+}

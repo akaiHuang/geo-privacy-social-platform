@@ -1,0 +1,29 @@
+# Firebase
+.firebaserc
+
+# Dependencies
+node_modules/
+web/node_modules/
+
+# Build output
+web/dist/
+web/.vite/
+
+# Logs
+*.log
+npm-debug.log*
+pglite-debug.log
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

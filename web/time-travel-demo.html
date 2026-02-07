@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>時光回溯功能測試 - BroBro</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1a1a24 0%, #2d2d3f 100%);
+      color: #E5E7EB;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .demo-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .demo-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      animation: fadeInDown 0.6s ease;
+    }
+
+    .demo-header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .demo-header p {
+      color: #9CA3AF;
+      font-size: 1.1rem;
+    }
+
+    .demo-content {
+      background: rgba(26, 26, 36, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(167, 139, 250, 0.3);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: rgba(167, 139, 250, 0.1);
+      border: 1px solid rgba(167, 139, 250, 0.2);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(167, 139, 250, 0.5);
+      box-shadow: 0 8px 24px rgba(167, 139, 250, 0.2);
+    }
+
+    .stat-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #9CA3AF;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #A78BFA;
+    }
+
+    .mock-posts {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+    }
+
+    .mock-post-card {
+      background: rgba(167, 139, 250, 0.1);
+      border: 1px solid rgba(167, 139, 250, 0.2);
+      border-radius: 12px;
+      padding: 1rem;
+      transition: all 0.3s ease;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .mock-post-card:hover {
+      transform: scale(1.05);
+      border-color: rgba(167, 139, 250, 0.5);
+    }
+
+    .post-time {
+      font-size: 0.85rem;
+      color: #A78BFA;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .post-content {
+      font-size: 0.9rem;
+      color: #E5E7EB;
+      line-height: 1.4;
+    }
+
+    .post-location {
+      font-size: 0.8rem;
+      color: #9CA3AF;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .controls-info {
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .controls-info h3 {
+      color: #3B82F6;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .controls-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .control-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: rgba(59, 130, 246, 0.05);
+      border-radius: 8px;
+    }
+
+    .control-icon {
+      font-size: 1.5rem;
+    }
+
+    .control-text {
+      font-size: 0.9rem;
+      color: #E5E7EB;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: #9CA3AF;
+    }
+
+    .empty-state-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* 確保右側有空間給時間控制器 */
+    body {
+      padding-right: 0px;
+    }
+
+    .demo-container {
+      margin-right: 120px;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <div class="demo-header">
+      <h1>⏰ 時光回溯功能測試</h1>
+      <p>體驗地圖時間軸回放功能</p>
+    </div>
+
+    <div class="demo-content">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">🕐</div>
+          <div class="stat-label">當前時間槽</div>
+          <div class="stat-value" id="current-time-slot">--:--</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📍</div>
+          <div class="stat-label">貼文數量</div>
+          <div class="stat-value" id="post-count">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⏱️</div>
+          <div class="stat-label">相對時間</div>
+          <div class="stat-value" id="relative-time" style="font-size: 1.5rem;">即時</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-label">時間槽總數</div>
+          <div class="stat-value" id="total-slots">48</div>
+        </div>
+      </div>
+
+      <div id="posts-container">
+        <div class="empty-state">
+          <div class="empty-state-icon">🔍</div>
+          <p>使用下方時間軸查看不同時段的模擬貼文</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-content controls-info">
+      <h3>🎮 操作說明</h3>
+      <div class="controls-list">
+        <div class="control-item">
+          <span class="control-icon">⏮</span>
+          <span class="control-text">上一個時段（-30分鐘）</span>
+        </div>
+        <div class="control-item">
+          <span class="control-icon">▶️</span>
+          <span class="control-text">播放/暫停自動回放</span>
+        </div>
+        <div class="control-item">
+          <span class="control-icon">⏭</span>
+          <span class="control-text">下一個時段（+30分鐘）</span>
+        </div>
+        <div class="control-item">
+          <span class="control-icon">🎚️</span>
+          <span class="control-text">拖曳滑桿快速跳轉</span>
+        </div>
+        <div class="control-item">
+          <span class="control-icon">⚡</span>
+          <span class="control-text">調整播放速度（1x/2x/4x）</span>
+        </div>
+        <div class="control-item">
+          <span class="control-icon">🕐</span>
+          <span class="control-text">跳回現在時間</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TimeSlider 組件的容器 -->
+  <div id="time-slider-root"></div>
+
+  <!-- 引入 React 和相關依賴 -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  
+  <script type="module">
+    // 模擬生成測試數據
+    function generateMockPosts(timeSlot) {
+      const [date, time] = timeSlot.split(' ');
+      const [hours, minutes] = time.split(':');
+      const hour = parseInt(hours);
+      
+      // 根據時段生成不同數量的貼文（模擬活躍度變化）
+      let postCount;
+      if (hour >= 7 && hour <= 9) postCount = Math.floor(Math.random() * 15) + 10; // 早晨高峰
+      else if (hour >= 12 && hour <= 14) postCount = Math.floor(Math.random() * 20) + 15; // 午餐高峰
+      else if (hour >= 18 && hour <= 22) postCount = Math.floor(Math.random() * 25) + 20; // 晚間高峰
+      else if (hour >= 0 && hour <= 6) postCount = Math.floor(Math.random() * 5) + 1; // 深夜
+      else postCount = Math.floor(Math.random() * 10) + 5; // 其他時段
+      
+      const posts = [];
+      const locations = [
+        '台北市大安區', '台北市信義區', '新北市板橋區', '桃園市中壢區',
+        '台中市西屯區', '台南市東區', '高雄市前鎮區', '新竹市東區'
+      ];
+      
+      const contents = [
+        '今天天氣真好！☀️',
+        '剛吃完超好吃的美食 🍜',
+        '這個地方風景真美 🏞️',
+        '週末愉快大家！🎉',
+        '下班了，準備回家 🏠',
+        '早安！新的一天開始了 ☕',
+        '今天運動完超舒服 💪',
+        '發現一家新開的咖啡廳 ☕',
+      ];
+      
+      for (let i = 0; i < postCount; i++) {
+        posts.push({
+          id: `${timeSlot}-${i}`,
+          time: timeSlot,
+          content: contents[Math.floor(Math.random() * contents.length)],
+          location: locations[Math.floor(Math.random() * locations.length)]
+        });
+      }
+      
+      return posts;
+    }
+
+    // 更新顯示
+    function updateDisplay(timeSlot, posts) {
+      // 更新統計
+      document.getElementById('current-time-slot').textContent = timeSlot.split(' ')[1];
+      document.getElementById('post-count').textContent = posts.length;
+      
+      // 計算相對時間
+      const now = new Date();
+      const [date, time] = timeSlot.split(' ');
+      const [year, month, day] = date.split('-');
+      const [hours, minutes] = time.split(':');
+      const slotDate = new Date(year, month - 1, day, hours, minutes);
+      const diffHours = (now - slotDate) / (1000 * 60 * 60);
+      
+      let relativeTime;
+      if (diffHours < 0.1) relativeTime = '即時';
+      else if (diffHours < 1) relativeTime = `${Math.round(diffHours * 60)}分前`;
+      else relativeTime = `${diffHours.toFixed(1)}小時前`;
+      
+      document.getElementById('relative-time').textContent = relativeTime;
+      
+      // 更新貼文列表
+      const container = document.getElementById('posts-container');
+      
+      if (posts.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">😴</div>
+            <p>此時段沒有貼文</p>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <div class="mock-posts">
+            ${posts.map(post => `
+              <div class="mock-post-card">
+                <div class="post-time">${post.time.split(' ')[1]}</div>
+                <div class="post-content">${post.content}</div>
+                <div class="post-location">📍 ${post.location}</div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+    }
+
+    // 模擬 TimeSlider 功能
+    window.handleTimeChange = function(timeSlot) {
+      console.log('Time changed to:', timeSlot);
+      const posts = generateMockPosts(timeSlot);
+      updateDisplay(timeSlot, posts);
+    };
+
+    // 初始化顯示
+    const now = new Date();
+    const currentTimeSlot = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${now.getMinutes() >= 30 ? '30' : '00'}`;
+    updateDisplay(currentTimeSlot, generateMockPosts(currentTimeSlot));
+  </script>
+
+  <style>
+    /* 垂直時間刻度控制器 - 極簡設計 */
+    .time-slider-container {
+      position: fixed;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 60px;
+      height: 85vh;
+      max-height: 750px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    /* 隱藏原有的時間顯示和按鈕 */
+    .time-display {
+      display: none;
+    }
+
+    .control-btn {
+      display: none;
+    }
+
+    /* 垂直滑桿容器 */
+    .slider-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      width: 100%;
+      position: relative;
+      padding: 0 20px;
+      pointer-events: auto;
+    }
+
+    /* 垂直滑桿 - 完全透明 */
+    .time-slider-wrapper {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .time-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 40px;
+      height: 100%;
+      background: transparent;
+      outline: none;
+      cursor: pointer;
+      position: absolute;
+      z-index: 10;
+      writing-mode: bt-lr;
+    }
+
+    .time-slider::-webkit-slider-runnable-track {
+      background: transparent;
+    }
+
+    .time-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      cursor: pointer;
+      border: none;
+    }
+
+    .time-slider::-moz-range-track {
+      background: transparent;
+    }
+
+    .time-slider::-moz-range-thumb {
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      cursor: pointer;
+      border: none;
+    }
+
+    /* 時間刻度標記容器 */
+    .time-marks {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* 刻度線基礎樣式 */
+    .time-mark {
+      position: relative;
+      height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .time-mark::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.7);
+      filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* 細線（每個時間點）- 每 30 分鐘 */
+    .time-mark.thin::before {
+      width: 12px;
+      height: 1.5px;
+    }
+
+    /* 粗線（每4個細線後）- 每 2 小時 */
+    .time-mark.thick::before {
+      width: 20px;
+      height: 2.5px;
+      background: rgba(255, 255, 255, 0.9);
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.4));
+    }
+
+    /* 時間標籤 - 完全隱藏 */
+    .time-mark-label {
+      display: none;
+    }
+
+    /* 當前時間顯示框 - 跟隨滑鼠 */
+    .current-time-bubble {
+      position: fixed;
+      background: rgba(255, 255, 255, 0.95);
+      color: #000;
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 10000;
+      white-space: nowrap;
+    }
+
+    .current-time-bubble.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* 當前位置指示器 */
+    .current-position-indicator {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px;
+      height: 12px;
+      background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.3),
+                  0 2px 8px rgba(139, 92, 246, 0.5);
+      pointer-events: none;
+      z-index: 20;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .time-slider:active ~ .current-position-indicator {
+      transform: translate(-50%, -50%) scale(1.3);
+      box-shadow: 0 0 0 5px rgba(167, 139, 250, 0.4),
+                  0 4px 16px rgba(139, 92, 246, 0.7);
+    }
+
+    /* 進度指示器 */
+    .progress-indicator {
+      display: none;
+    }
+
+    /* 移動端適配 */
+    @media (max-width: 768px) {
+      .time-slider-container {
+        right: 1rem;
+        width: 50px;
+      }
+
+      .slider-controls {
+        padding: 0 15px;
+      }
+
+      .time-mark.thin::before {
+        width: 10px;
+      }
+
+      .time-mark.thick::before {
+        width: 16px;
+      }
+
+      .current-time-bubble {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
+      }
+    }
+
+    /* 小螢幕適配 */
+    @media (max-width: 480px) {
+      body {
+        padding-right: 70px;
+      }
+
+      .demo-container {
+        margin-right: 70px;
+      }
+
+      .time-slider-container {
+        right: 0.5rem;
+        width: 45px;
+        max-height: 650px;
+      }
+
+      .slider-controls {
+        padding: 0 12px;
+      }
+    }
+  </style>
+
+  <!-- 純 JavaScript 實現的 TimeSlider -->
+  <script>
+    (function() {
+      const maxHistoryHours = 24;
+      let selectedIndex = 0;
+      let timeSlots = [];
+      let isPlaying = false;
+      let playbackSpeed = 1;
+      let playInterval = null;
+
+      // 生成時間槽
+      function generateTimeSlots() {
+        const slots = [];
+        const now = new Date();
+        const totalSlots = maxHistoryHours * 2;
+
+        for (let i = totalSlots; i >= 0; i--) {
+          const time = new Date(now.getTime() - i * 30 * 60 * 1000);
+          const year = time.getFullYear();
+          const month = String(time.getMonth() + 1).padStart(2, '0');
+          const day = String(time.getDate()).padStart(2, '0');
+          const hours = String(time.getHours()).padStart(2, '0');
+          const minutes = time.getMinutes() >= 30 ? '30' : '00';
+          slots.push(`${year}-${month}-${day} ${hours}:${minutes}`);
+        }
+
+        return slots;
+      }
+
+      function formatDisplay(timeSlot) {
+        const [date, time] = timeSlot.split(' ');
+        const [year, month, day] = date.split('-');
+        return `${month}/${day} ${time}`;
+      }
+
+      function getHoursAgo(timeSlot) {
+        const [date, time] = timeSlot.split(' ');
+        const [year, month, day] = date.split('-');
+        const [hours, minutes] = time.split(':');
+        const slotDate = new Date(year, month - 1, day, hours, minutes);
+        const now = new Date();
+        return (now - slotDate) / (1000 * 60 * 60);
+      }
+
+      function updateDisplay() {
+        const timeSlot = timeSlots[selectedIndex];
+        const hoursAgo = getHoursAgo(timeSlot);
+        const isCurrentTime = selectedIndex === timeSlots.length - 1;
+
+        document.getElementById('current-time-display').textContent = formatDisplay(timeSlot);
+        
+        const timeAgoEl = document.getElementById('time-ago-display');
+        if (isCurrentTime) {
+          timeAgoEl.innerHTML = '<span class="current-badge">● 即時</span>';
+        } else {
+          const text = hoursAgo < 1 
+            ? `(${Math.round(hoursAgo * 60)} 分鐘前)`
+            : `(${hoursAgo.toFixed(1)} 小時前)`;
+          timeAgoEl.innerHTML = `<span class="time-ago">${text}</span>`;
+        }
+
+        document.getElementById('time-slider-input').value = selectedIndex;
+        document.getElementById('progress-text').textContent = `${selectedIndex + 1} / ${timeSlots.length}`;
+
+        // 更新按鈕狀態
+        document.getElementById('btn-prev').disabled = selectedIndex === 0;
+        document.getElementById('btn-next').disabled = isCurrentTime;
+        document.getElementById('btn-now').disabled = isCurrentTime;
+
+        // 觸發回調
+        if (window.handleTimeChange) {
+          window.handleTimeChange(timeSlot);
+        }
+      }
+
+      function startPlayback() {
+        if (playInterval) clearInterval(playInterval);
+        playInterval = setInterval(() => {
+          if (selectedIndex >= timeSlots.length - 1) {
+            stopPlayback();
+          } else {
+            selectedIndex++;
+            updateDisplay();
+          }
+        }, 1000 / playbackSpeed);
+      }
+
+      function stopPlayback() {
+        isPlaying = false;
+        if (playInterval) {
+          clearInterval(playInterval);
+          playInterval = null;
+        }
+        document.getElementById('btn-play').innerHTML = `
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        `;
+        const speedBtn = document.getElementById('btn-speed');
+        if (speedBtn) speedBtn.remove();
+      }
+
+      function init() {
+        timeSlots = generateTimeSlots();
+        selectedIndex = timeSlots.length - 1;
+
+        const container = document.getElementById('time-slider-root');
+        container.innerHTML = `
+          <div class="time-slider-container">
+            <div class="slider-controls">
+              <div class="time-slider-wrapper" id="slider-wrapper">
+                <div class="time-marks" id="time-marks"></div>
+                <div class="current-position-indicator" id="current-indicator"></div>
+                <div class="current-time-bubble" id="time-bubble">
+                  <span id="bubble-time">14:30</span>
+                </div>
+                <input type="range" min="0" max="${timeSlots.length - 1}" value="${selectedIndex}" 
+                       class="time-slider" id="time-slider-input" orient="vertical">
+              </div>
+            </div>
+
+            <div class="progress-indicator">
+              <div class="progress-text" id="progress-text"></div>
+            </div>
+          </div>
+        `;
+
+        // 生成時間刻度 - 每個時間槽一個刻度
+        const marksContainer = document.getElementById('time-marks');
+        marksContainer.innerHTML = '';
+        
+        // 從最新到最舊排列（上到下）
+        const reversedSlots = [...timeSlots].reverse();
+        
+        reversedSlots.forEach((slot, displayIndex) => {
+          const actualIndex = timeSlots.length - 1 - displayIndex;
+          const mark = document.createElement('div');
+          const isThick = actualIndex % 4 === 0; // 每4個細線後一個粗線
+          mark.className = `time-mark ${isThick ? 'thick' : 'thin'}`;
+          mark.dataset.index = actualIndex;
+          marksContainer.appendChild(mark);
+        });
+
+        // 獲取元素
+        const slider = document.getElementById('time-slider-input');
+        const sliderWrapper = document.getElementById('slider-wrapper');
+        const bubble = document.getElementById('time-bubble');
+        const indicator = document.getElementById('current-indicator');
+        let isDragging = false;
+
+        // 更新位置和顯示
+        function updatePositionAndDisplay() {
+          const timeSlot = timeSlots[selectedIndex];
+          
+          // 計算位置（從底部往上，0 在底部，max 在頂部）
+          const percentage = selectedIndex / (timeSlots.length - 1);
+          const wrapperHeight = sliderWrapper.offsetHeight;
+          const top = wrapperHeight * (1 - percentage);
+          
+          console.log('📍 Position update:', {
+            selectedIndex,
+            timeSlot,
+            percentage: percentage.toFixed(2),
+            wrapperHeight,
+            calculatedTop: top.toFixed(2),
+            formula: `${wrapperHeight} * (1 - ${percentage.toFixed(2)}) = ${top.toFixed(2)}`
+          });
+          
+          // 更新指示器位置
+          if (indicator) {
+            indicator.style.top = `${top}px`;
+            console.log('🟣 Indicator updated:', indicator.style.top);
+          }
+          
+          // 更新時間泡泡內容
+          if (bubble) {
+            document.getElementById('bubble-time').textContent = formatDisplay(timeSlot);
+          }
+          
+          // 更新精靈效果
+          if (isDragging) {
+            updateGenieEffect(selectedIndex);
+          }
+          
+          // 觸發回調更新貼文顯示
+          if (window.handleTimeChange) {
+            window.handleTimeChange(timeSlot);
+          }
+        }
+
+        // 滑桿輸入事件 - 禁用，改用手動計算
+        // slider.addEventListener('input', function(e) {
+        //   selectedIndex = parseInt(this.value);
+        //   console.log('🔵 Slider input:', {
+        //     sliderValue: this.value,
+        //     selectedIndex,
+        //     totalSlots: timeSlots.length,
+        //     percentage: selectedIndex / (timeSlots.length - 1)
+        //   });
+        //   updatePositionAndDisplay();
+        // });
+
+        // 按下時顯示時間泡泡和精靈效果
+        slider.addEventListener('mousedown', function(e) {
+          const rect = this.getBoundingClientRect();
+          const clickY = e.clientY - rect.top; // 點擊位置距離頂部的距離
+          const sliderHeight = rect.height;
+          
+          // 手動計算應該對應的索引（從上到下：0 到 max）
+          const percentage = clickY / sliderHeight;
+          const calculatedIndex = Math.round(percentage * (timeSlots.length - 1));
+          
+          console.log('🖱️ Mouse down:', {
+            clientY: e.clientY,
+            rectTop: rect.top,
+            rectBottom: rect.bottom,
+            clickY,
+            sliderHeight,
+            percentage: percentage.toFixed(3),
+            calculatedIndex,
+            currentValue: this.value,
+            shouldBe: timeSlots.length - 1 - calculatedIndex // 反轉（從底部算起）
+          });
+          
+          // 手動設置滑桿值（從底部往上：max 在頂部，0 在底部）
+          const correctedIndex = timeSlots.length - 1 - calculatedIndex;
+          this.value = correctedIndex;
+          selectedIndex = correctedIndex;
+          
+          isDragging = true;
+          bubble.classList.add('visible');
+          updatePositionAndDisplay();
+          updateMousePosition(e);
+        });
+
+        slider.addEventListener('touchstart', function(e) {
+          const rect = this.getBoundingClientRect();
+          const touch = e.touches[0];
+          const clickY = touch.clientY - rect.top;
+          const sliderHeight = rect.height;
+          const percentage = clickY / sliderHeight;
+          const calculatedIndex = Math.round(percentage * (timeSlots.length - 1));
+          const correctedIndex = timeSlots.length - 1 - calculatedIndex;
+          
+          console.log('👆 Touch start:', {
+            clientY: touch.clientY,
+            clickY,
+            percentage: percentage.toFixed(3),
+            correctedIndex
+          });
+          
+          this.value = correctedIndex;
+          selectedIndex = correctedIndex;
+          
+          isDragging = true;
+          bubble.classList.add('visible');
+          updatePositionAndDisplay();
+          updateMousePosition(touch);
+        });
+
+        // 滑鼠/觸控移動時更新泡泡位置
+        function updateMousePosition(e) {
+          if (isDragging && bubble) {
+            // 設置泡泡位置在滑鼠旁邊
+            const x = e.clientX || e.pageX;
+            const y = e.clientY || e.pageY;
+            
+            console.log('📍 Mouse position:', { x, y });
+            
+            // 泡泡顯示在滑鼠左側
+            bubble.style.left = `${x - 80}px`;
+            bubble.style.top = `${y}px`;
+            bubble.style.transform = 'translateY(-50%)';
+          }
+        }
+
+        slider.addEventListener('mousemove', function(e) {
+          if (isDragging) {
+            // 手動計算拖動位置對應的索引
+            const rect = this.getBoundingClientRect();
+            const dragY = e.clientY - rect.top;
+            const sliderHeight = rect.height;
+            const percentage = Math.max(0, Math.min(1, dragY / sliderHeight));
+            const calculatedIndex = Math.round(percentage * (timeSlots.length - 1));
+            const correctedIndex = timeSlots.length - 1 - calculatedIndex;
+            
+            console.log('🖱️ Mouse move during drag:', {
+              clientY: e.clientY,
+              dragY,
+              percentage: percentage.toFixed(3),
+              calculatedIndex,
+              correctedIndex,
+              oldIndex: selectedIndex
+            });
+            
+            // 更新索引和滑桿值
+            this.value = correctedIndex;
+            selectedIndex = correctedIndex;
+            updatePositionAndDisplay();
+            updateMousePosition(e);
+          }
+        });
+
+        slider.addEventListener('touchmove', function(e) {
+          if (isDragging && e.touches[0]) {
+            // 手動計算觸控拖動位置
+            const rect = this.getBoundingClientRect();
+            const touch = e.touches[0];
+            const dragY = touch.clientY - rect.top;
+            const sliderHeight = rect.height;
+            const percentage = Math.max(0, Math.min(1, dragY / sliderHeight));
+            const calculatedIndex = Math.round(percentage * (timeSlots.length - 1));
+            const correctedIndex = timeSlots.length - 1 - calculatedIndex;
+            
+            this.value = correctedIndex;
+            selectedIndex = correctedIndex;
+            updatePositionAndDisplay();
+            updateMousePosition(touch);
+          }
+        });
+
+        // 點擊事件（跳轉到指定位置）
+        slider.addEventListener('click', function(e) {
+          console.log('🎯 Click event:', {
+            clientY: e.clientY,
+            offsetY: e.offsetY,
+            sliderRect: this.getBoundingClientRect(),
+            sliderHeight: this.offsetHeight,
+            sliderValue: this.value,
+            calculatedIndex: '應該根據點擊位置計算'
+          });
+        });
+
+        // 放開時隱藏時間泡泡
+        function handleRelease(e) {
+          console.log('🖱️ Mouse/Touch released');
+          if (isDragging) {
+            isDragging = false;
+            bubble.classList.remove('visible');
+            resetGenieEffect(); // 立即重置精靈效果
+          }
+        }
+
+        slider.addEventListener('mouseup', handleRelease);
+        slider.addEventListener('touchend', handleRelease);
+        document.addEventListener('mouseup', handleRelease);
+        document.addEventListener('touchend', handleRelease);
+
+        // 初始化顯示
+        updatePositionAndDisplay();
+      }
+
+      // Genie 精靈效果 - macOS Dock 風格
+      function updateGenieEffect(currentIndex) {
+        const marks = document.querySelectorAll('.time-mark');
+        
+        marks.forEach((mark) => {
+          const markIndex = parseInt(mark.dataset.index);
+          const distance = Math.abs(currentIndex - markIndex);
+          
+          // 距離越近，放大倍數越大
+          let scale = 1;
+          
+          if (distance === 0) {
+            scale = 3.0;
+          } else if (distance <= 1) {
+            scale = 2.4;
+          } else if (distance <= 2) {
+            scale = 2.0;
+          } else if (distance <= 3) {
+            scale = 1.6;
+          } else if (distance <= 5) {
+            scale = 1.3;
+          } else if (distance <= 8) {
+            scale = 1.1;
+          }
+          
+          mark.style.transform = `scaleX(${scale})`;
+        });
+      }
+
+      // 重置精靈效果
+      function resetGenieEffect() {
+        const marks = document.querySelectorAll('.time-mark');
+        marks.forEach((mark) => {
+          mark.style.transform = 'scaleX(1)';
+        });
+      }
+
+      // 頁面載入後初始化
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

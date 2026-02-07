@@ -14,9 +14,13 @@
 >
 > 具備地理隱私保護的社交平台 -- 透過 Haversine 公式實現 2 公里位置模糊化，同時支援 React Native 行動端與 React Web 端。
 
+## 📋 Quick Summary
+
+> 🔒 **Geo-Privacy Social Platform** 是一款以「隱私優先」為核心設計理念的地理社交平台。📱 支援雙平台架構——React Native (Expo 51) 行動 App 加上 React (Vite) Web App，共享核心邏輯。🗺️ 最大特色是 **2km 位置模糊化演算法**：每則貼文發布時自動套用隨機位置偏移，確保使用者真實位置不被暴露。📐 運用 Haversine 球面距離公式進行精確的附近內容探索，在隱私保護與社交功能間取得完美平衡。💬 完整社交功能涵蓋即時貼文、留言、按讚、好友系統、通知、收藏與封鎖機制。🗄️ Firestore 後端設計了 10 個集合搭配 148 行安全規則，實現列級存取控制。🕐 獨特的時間旅行功能讓使用者透過時間軸滑桿探索歷史內容。🛠️ 技術棧包含 TypeScript 5.3、Mapbox GL、Firebase Auth/Storage，共計 63 個 TS 檔案約 10,460 行程式碼。適合需要位置感知但重視隱私保護的社交應用場景。
+
 ---
 
-## Highlights / 專案亮點
+## ⭐ Highlights / 專案亮點
 
 | Feature | Description |
 |---------|-------------|
@@ -29,7 +33,7 @@
 
 ---
 
-## Architecture / 系統架構
+## 🏗️ Architecture / 系統架構
 
 ```
 geo-privacy-social-platform/
@@ -91,7 +95,7 @@ geo-privacy-social-platform/
 
 ---
 
-## Tech Stack / 技術棧
+## 🛠️ Tech Stack / 技術棧
 
 ```
   Mobile        React Native 0.74  +  Expo 51  |  iOS & Android
@@ -107,7 +111,7 @@ geo-privacy-social-platform/
 
 ---
 
-## Privacy Engineering / 隱私工程
+## 🔐 Privacy Engineering / 隱私工程
 
 ### 2km Location Fuzzing Algorithm / 位置模糊化演算法
 
@@ -159,7 +163,7 @@ User's Real Location
 
 ---
 
-## Firestore Data Model / 資料模型
+## 🗄️ Firestore Data Model / 資料模型
 
 ### 10 Collections with Security Rules / 10 個集合與安全規則
 
@@ -191,7 +195,7 @@ allow read: if resource.data.userId == request.auth.uid;
 
 ---
 
-## Quick Start / 快速開始
+## 🏁 Quick Start / 快速開始
 
 ### Mobile App (React Native + Expo)
 
@@ -239,7 +243,7 @@ firebase deploy --only firestore:rules
 
 ---
 
-## Features / 功能列表
+## 🚀 Features / 功能列表
 
 ### Social / 社交功能
 - User registration and authentication / 使用者註冊與認證
@@ -265,7 +269,7 @@ firebase deploy --only firestore:rules
 
 ---
 
-## Project Stats / 專案統計
+## 📊 Project Stats / 專案統計
 
 ```
 Total Files:       127
@@ -278,7 +282,7 @@ Platforms:         iOS, Android, Web
 
 ---
 
-## License
+## 📄 License
 
 MIT License
 

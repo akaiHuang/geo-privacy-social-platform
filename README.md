@@ -18,6 +18,10 @@
 
 Geo-Privacy Social Platform 是一款隱私優先的地理社交應用，透過位置模糊化等機制在「可分享」與「可保護」之間取得平衡。適合用於地理內容產品的原型驗證，或作為位置隱私設計（如 2km fuzzing）與雙平台架構的參考。
 
+## About (EN)
+
+Geo-Privacy Social Platform is a privacy-first location-aware social product that balances discoverability with user safety. It demonstrates geolocation sharing patterns with protective mechanisms such as location fuzzing.
+
 ## 📋 Quick Summary
 
 > 🔒 **Geo-Privacy Social Platform** 是一款以「隱私優先」為核心設計理念的地理社交平台。📱 支援雙平台架構——React Native (Expo 51) 行動 App 加上 React (Vite) Web App，共享核心邏輯。🗺️ 最大特色是 **2km 位置模糊化演算法**：每則貼文發布時自動套用隨機位置偏移，確保使用者真實位置不被暴露。📐 運用 Haversine 球面距離公式進行精確的附近內容探索，在隱私保護與社交功能間取得完美平衡。💬 完整社交功能涵蓋即時貼文、留言、按讚、好友系統、通知、收藏與封鎖機制。🗄️ Firestore 後端設計了 10 個集合搭配 148 行安全規則，實現列級存取控制。🕐 獨特的時間旅行功能讓使用者透過時間軸滑桿探索歷史內容。🛠️ 技術棧包含 TypeScript 5.3、Mapbox GL、Firebase Auth/Storage，共計 63 個 TS 檔案約 10,460 行程式碼。適合需要位置感知但重視隱私保護的社交應用場景。
